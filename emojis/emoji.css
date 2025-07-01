@@ -1,0 +1,20 @@
+emoji {
+    display: inline-block;
+    content: none;
+    height: 20px;
+    width: 20px;
+}
+
+/* this is a terrible way to do emojis but wait; I DON'T CARE!!! HAHAHAHAHAHAHAHHA SCREW YOU.. WHOEVER YOU ARE! */
+emoji#biggrin { background: url('biggrin.png'); background-size: cover; }
+emoji#confused { background: url('confused.png'); background-size: cover; }
+emoji#cool { background: url('cool.png'); background-size: cover; }
+emoji#eek { background: url('eek.png'); background-size: cover; }
+emoji#frown { background: url('frown.png'); background-size: cover; }
+emoji#mad { background: url('mad.png'); background-size: cover; }
+emoji#redface { background: url('redface.png'); background-size: cover; }
+emoji#rolleyes { background: url('rolleyes.png'); background-size: cover; }
+emoji#smile { background: url('smile.png'); background-size: cover; }
+emoji#thumbup { background: url('thumbup.png'); background-size: cover; }
+emoji#wink { background: url('wink.png'); background-size: cover; }
+emoji#tounge { background: url('tounge.png'); background-size: cover; }
