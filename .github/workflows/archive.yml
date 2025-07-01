@@ -38,9 +38,12 @@ jobs:
           zip -r Archive.zip . -x ".git/*" ".github/*" "Archive.zip"
 
       - name: Commit and push Archive.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "GitHub Action"
           git config user.email "actions@github.com"
           git add Archive.zip
           git commit -m "[auto] updated archive"
-          git push
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:${{ github.ref_name }}
+
