@@ -1,9 +1,9 @@
-name: Auto Zip Archive
+name: Auto-archive
 
 on:
   push:
     branches:
-      - main  # or whatever your main branch is
+      - main
 
 jobs:
   zip-and-commit:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout the repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # required for commit checks
+          fetch-depth: 0
 
       - name: Check if last commit was from bot
         id: check_commit
