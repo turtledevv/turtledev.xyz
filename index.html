@@ -5,8 +5,49 @@
     <title>turtledevv's corner</title>
     <link rel="stylesheet" href="emojis/emoji.css">
     <link rel="icon" type="image/gif" href="turtle-icon.gif">
+    <script>
+      // Helper to set a cookie
+      function setCookie(name, value, days) {
+        const expires = new Date(Date.now() + days * 864e5).toUTCString();
+        document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+      }
+
+      // Helper to get a cookie
+      function getCookie(name) {
+        return document.cookie.split('; ').find(row => row.startsWith(name + '='))?.split('=')[1];
+      }
+
+      // Apply saved preference on load
+      window.onload = function () {
+        const savedMode = getCookie('theme');
+        if (savedMode === 'dark') {
+          document.body.id = 'dark';
+        }
+      };
+      function togglemode() {
+        if (document.body.id === 'dark') {
+          document.body.id = '';
+          setCookie('theme', 'light', 365);
+        } else {
+          document.body.id = 'dark';
+          setCookie('theme', 'dark', 365);
+        }
+      }
+    </script>
+
     <style>
+      body#dark {
+        backdrop-filter: invert(1);
+        color: white;
+      }
+
+      body#dark button, body#dark img#cat {
+        filter: invert(1);
+      }
+
       body {
+        margin: 0;
+        padding: 8px;
         width: 100vw;
         height: 100vh;
         background: url('mainback.gif');
@@ -70,7 +111,8 @@
     <main>
       <p>i'm <span style="font-family: 'Comic Sans MS', 'Comic Sans';">turtledevv</span>. welcome to my awesome website <emoji id='classic smile'></p>
       <p>i'll be updating this website often. this is my new personal website! yay.</p>
-      <img src="cat.gif" style="cursor: grab;" onclick="alert('thank you for petting cat')"> nothing much is here. apart from this cat. pet the cat.
+      <img src="cat.gif" style="cursor: grab;" id='cat' onclick="alert('thank you for petting cat')"> nothing much is here. apart from this cat. pet the cat.
+      <br><br><button onclick="togglemode()">switch light/dark</button>
     </main>
 
     <footer>
