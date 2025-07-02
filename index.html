@@ -49,41 +49,46 @@
     </script>
 
     <style>
-        #blackBox {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: black;
-      z-index: 999999999;
-      pointer-events: all;
-      opacity: 1;
-      transition: opacity 0.5s ease-in-out;
-    }
-      body#dark {
-        backdrop-filter: invert(1);
-        color: white;
+      #blackBox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: black;
+        z-index: 999999999;
+        pointer-events: all;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
       }
 
-      body#dark button, body#dark img#cat {
+      body#dark {
+        color: white;
+        background-color: black;
+      }
+
+      body#dark nav {
+        filter: invert(1);
+      }
+
+      body#dark main button, body#dark img#cat {
         filter: invert(1);
       }
 
       body {
         margin: 0;
-        padding: 8px;
         width: 100vw;
         height: 100vh;
-        background: url('mainback.gif');
-        background-repeat: repeat-x;
-        background-position: top;
+        background: white;
+      }
+
+      main, header {
+        margin: 8px;
       }
 
       header {
         display: flex;
         height: 80px;
-        padding-bottom: 23px;
       }
 
       nav button {
@@ -91,7 +96,13 @@
       }
 
       nav {
-        margin-bottom: 28px;
+        padding-left: 8px;
+        background: url('lines.gif');
+        background-repeat: repeat-x;
+        background-size: 265px 100%;
+        background-position: top;
+        padding-bottom: 18px;
+        padding-top: 15px;
       }
 
       button {
@@ -141,7 +152,7 @@
       <p>i'm <span style="font-family: 'Comic Sans MS', 'Comic Sans';">turtledevv</span>. welcome to my awesome website <emoji id='classic smile'></p>
       <p>i'll be updating this website often. this is my new personal website! yay.</p>
       <img src="cat.gif" style="cursor: grab;" id='cat' onclick="alert('thank you for petting cat')"> nothing much is here. apart from this cat. pet the cat.
-      <br><br><button onclick="togglemode()">switch light/dark</button>
+      <br><br><button onclick="togglemode()">☀️/🌙</button>
     </main>
 
     <footer>
