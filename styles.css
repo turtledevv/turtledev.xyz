@@ -1,0 +1,103 @@
+#blackBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    z-index: 999999999;
+    pointer-events: all;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+
+
+body#dark {
+    color: white;
+    background-color: black;
+}
+
+/* warning; janky as hell */
+body#dark div.a {
+    color: rgb(0, 0, 0);
+    filter: invert(1);
+}
+
+body#dark div.a emoji {
+    filter: invert(1);
+}
+/* warning end */
+
+body#dark nav {
+    filter: invert(1);
+}
+
+body#dark main button, body#dark img#cat {
+    filter: invert(1);
+}
+
+
+
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+}
+
+main, header {
+    margin: 8px;
+}
+
+header {
+    display: flex;
+    height: 80px;
+}
+
+nav button {
+    margin-right: 10px;
+}
+
+nav {
+    padding-left: 8px;
+    background: url('assets/lines.gif');
+    background-repeat: repeat-x;
+    background-size: 265px 100%;
+    background-position: top;
+    padding-bottom: 18px;
+    padding-top: 15px;
+}
+
+button {
+    background: url('assets/button.gif');
+    background-size: 100% 100%;
+    border: none;
+    padding: 5px 8px 5px 8px;
+    border-radius: 3.77px;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(1.5);
+}
+
+footer {
+    margin-top: 60px;
+    width: 100vw;
+    text-align: center;
+}
+
+footer img {
+    margin-right: 5px;
+}
+
+div.a {
+    background: url('assets/div.png');
+    background-size: 100% 100%;
+}
+
+#me {
+    width: fit-content;
+    padding: 10px;
+}
