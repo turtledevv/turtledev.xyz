@@ -67,10 +67,16 @@
         background-color: black;
       }
 
+      /* warning; janky as hell */
       body#dark div.a {
-        color: white;
-        backdrop-filter: invert(1);
+        color: rgb(0, 0, 0);
+        filter: invert(1);
       }
+
+      body#dark div.a emoji {
+        filter: invert(1);
+      }
+      /* warning end */
 
       body#dark nav {
         filter: invert(1);
