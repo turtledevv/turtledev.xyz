@@ -1,2 +1,34 @@
-hello there
-<iframe src="hehehaha.html"></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Infinite Looping Iframe</title>
+</head>
+<body>
+<iframe id="loopingIframe" style="width:100%;height:100vh;"></iframe>
+
+<script>
+const iframe = document.getElementById('loopingIframe');
+
+function loadIframe() {
+    // Use srcdoc so the iframe contains JS to reload itself
+    iframe.srcdoc = `
+        <html>
+        <body style="margin:0;">
+            <iframe style="width:100%;height:100vh;" id="inner"></iframe>
+            <script>
+                const f = document.getElementById('inner');
+                function loop() {
+                    f.srcdoc = '<html><body style="margin:0;"><h1 style="text-align:center;">Infinite...</h1><script>(${loop.toString()})();<\\/script></body></html>';
+                }
+                loop();
+            <\/script>
+        </body>
+        </html>
+    `;
+}
+
+loadIframe();
+</script>
+</body>
+</html>
