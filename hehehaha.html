@@ -1,34 +1,191 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Infinite Looping Iframe</title>
+<meta charset="utf-8" />
+<title>Browser Power Test: Deep Iframe Nesting</title>
+<style>
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding: 16px; }
+  #controls { margin-bottom: 8px; }
+  #log { white-space: pre-wrap; max-height: 200px; overflow:auto; border:1px solid #ddd; padding:8px; }
+  iframe { width: 100%; height: 60vh; border:1px solid #444; }
+  button { margin-right: 8px; }
+</style>
 </head>
 <body>
-<iframe id="loopingIframe" style="width:100%;height:100vh;"></iframe>
+
+<h2>Deep Iframe Nesting — Stress Test</h2>
+<div id="controls">
+  <label>Max depth: <input id="maxDepth" type="number" value="2000" min="1" step="1" style="width:100px"></label>
+  <label>Delay (ms): <input id="delay" type="number" value="0" min="0" step="10" style="width:80px"></label>
+  <button id="startBtn">Start nesting</button>
+  <button id="stopBtn" disabled>Stop</button>
+  <span id="status" style="margin-left:12px;color:#900"></span>
+</div>
+
+<div id="log">Logs will appear here.</div>
+<br>
+<!-- container to hold the top iframe -->
+<div id="frameContainer"></div>
 
 <script>
-const iframe = document.getElementById('loopingIframe');
+const startBtn = document.getElementById('startBtn');
+const stopBtn = document.getElementById('stopBtn');
+const logEl = document.getElementById('log');
+const frameContainer = document.getElementById('frameContainer');
+const statusEl = document.getElementById('status');
 
-function loadIframe() {
-    // Use srcdoc so the iframe contains JS to reload itself
-    iframe.srcdoc = `
-        <html>
-        <body style="margin:0;">
-            <iframe style="width:100%;height:100vh;" id="inner"></iframe>
-            <script>
-                const f = document.getElementById('inner');
-                function loop() {
-                    f.srcdoc = '<html><body style="margin:0;"><h1 style="text-align:center;">Infinite...</h1><script>(${loop.toString()})();<\\/script></body></html>';
-                }
-                loop();
-            <\/script>
-        </body>
-        </html>
-    `;
+let running = false;
+let topFrame = null;
+
+function appendLog(s) {
+  logEl.textContent += s + '\\n';
+  logEl.scrollTop = logEl.scrollHeight;
 }
 
-loadIframe();
+// message listener from nested frames to track depth
+window.addEventListener('message', (ev) => {
+  if (ev.data && ev.data.type === 'depth-report') {
+    appendLog('Depth: ' + ev.data.depth);
+    statusEl.textContent = 'Depth ' + ev.data.depth;
+  } else if (ev.data && ev.data.type === 'finished') {
+    appendLog('Finished: ' + ev.data.reason);
+    stopNesting();
+  }
+}, false);
+
+function stopNesting() {
+  running = false;
+  stopBtn.disabled = true;
+  startBtn.disabled = false;
+  statusEl.textContent = 'stopped';
+  // remove the top frame to try to free memory
+  if (topFrame) {
+    try { topFrame.remove(); } catch(e) {}
+    topFrame = null;
+  }
+  appendLog('Nesting stopped. Cleaned top frame (maybe).');
+}
+
+// build the srcdoc string for an inner iframe that will create the next one
+function makeSrcdoc(depth, maxDepth, delay) {
+  // We must escape </script> in the string below as <\/script> to avoid premature script termination.
+  return `
+    <!doctype html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>body{margin:0;font-family:system-ui;font-size:12px}</style>
+    </head>
+    <body>
+      <div style="padding:6px;font-size:12px">inner depth: ${depth}</div>
+      <script>
+        (function(){
+          var depth = ${depth};
+          var maxDepth = ${maxDepth};
+          var delay = ${delay};
+          // report current depth to top via postMessage
+          try {
+            parent.postMessage({type:'depth-report', depth: depth}, '*');
+          } catch(e) {}
+
+          if (!(${delay} >= 0)) { delay = 0; }
+
+          if (depth >= maxDepth) {
+            try { parent.postMessage({type:'finished', reason:'reached maxDepth (' + maxDepth + ')'}, '*'); } catch(e){}
+            return;
+          }
+
+          // create the next iframe after a short timeout to let the browser breathe
+          setTimeout(function(){
+            try {
+              var f = document.createElement('iframe');
+              f.style.width = '100%';
+              f.style.height = '100%';
+              f.style.border = '0';
+              // recursively embed the next level's srcdoc
+              f.srcdoc = ${JSON.stringify(makeSrcdocStringForInner(depth + 1, maxDepth, delay))};
+              document.body.appendChild(f);
+            } catch (err) {
+              // if something goes wrong, tell the top window
+              try { parent.postMessage({type:'finished', reason: 'error: ' + err.toString()}, '*'); } catch(e) {}
+            }
+          }, delay);
+        })();
+      <\/script>
+    </body>
+    </html>
+  `;
+}
+
+// helper to generate inner string safely (avoids embedding template recursion directly)
+function makeSrcdocStringForInner(depth, maxDepth, delay) {
+  // This function returns the same content as makeSrcdoc would for the next depth,
+  // but as a literal string so we can JSON.stringify it above.
+  // We'll construct it the same way as makeSrcdoc. To avoid infinite recursion while building the string,
+  // we'll create a shallow representation here — it will still contain further nested srcdoc strings when executed.
+  return `<!doctype html>
+<html>
+<head><meta charset="utf-8"><style>body{margin:0;font-family:system-ui;font-size:12px}</style></head>
+<body>
+  <div style="padding:6px;font-size:12px">inner depth: ${depth}</div>
+  <script>
+    (function(){
+      var depth = ${depth};
+      var maxDepth = ${maxDepth};
+      var delay = ${delay};
+      try { parent.postMessage({type:'depth-report', depth: depth}, '*'); } catch(e){}
+      if (depth >= maxDepth) {
+        try { parent.postMessage({type:'finished', reason:'reached maxDepth (' + maxDepth + ')'}, '*'); } catch(e){}
+        return;
+      }
+      setTimeout(function(){
+        try {
+          var f = document.createElement('iframe');
+          f.style.width = '100%';
+          f.style.height = '100%';
+          f.style.border = '0';
+          f.srcdoc = ${JSON.stringify(makeSrcdoc(depth + 1, maxDepth, delay))};
+          document.body.appendChild(f);
+        } catch(err) {
+          try { parent.postMessage({type:'finished', reason: 'error: ' + err.toString()}, '*'); } catch(e){}
+        }
+      }, delay);
+    })();
+  <\/script>
+</body>
+</html>`;
+}
+
+startBtn.addEventListener('click', () => {
+  if (running) return;
+  running = true;
+  startBtn.disabled = true;
+  stopBtn.disabled = false;
+  logEl.textContent = '';
+  statusEl.textContent = 'starting...';
+
+  const maxDepth = parseInt(document.getElementById('maxDepth').value, 10) || 1000;
+  const delay = parseInt(document.getElementById('delay').value, 10) || 0;
+
+  appendLog('Starting nesting. maxDepth=' + maxDepth + ', delay=' + delay + 'ms. Brace yourself.');
+  // create top iframe and set its srcdoc to start at depth 0
+  topFrame = document.createElement('iframe');
+  topFrame.style.width = '100%';
+  topFrame.style.height = '60vh';
+  topFrame.style.border = '1px solid #000';
+  topFrame.id = 'topNester';
+
+  // generate initial srcdoc and attach
+  // We JSON.stringify to ensure safe embedding
+  topFrame.srcdoc = makeSrcdoc(0, maxDepth, delay);
+  frameContainer.innerHTML = '';
+  frameContainer.appendChild(topFrame);
+});
+
+stopBtn.addEventListener('click', () => {
+  appendLog('User requested stop. Attempting to stop and remove frames.');
+  stopNesting();
+});
 </script>
 </body>
 </html>
