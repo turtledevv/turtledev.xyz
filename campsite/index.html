@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ᴛʜᴇ cᴀᴍᴘsɪᴛᴇ</title>
+    <style>
+        body {
+            background: rgba(2, 0, 36, 1);
+            margin: 0;
+            color: white;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #sky {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(4,68,79,1) 100%);
+            z-index: 1;
+        }
+
+        #stars {
+            position: absolute;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url("stars.png") repeat;
+            background-size: cover;
+            filter: blur(1.4px);
+            animation: bgScroll 85s linear infinite;
+            z-index: 2;
+        }
+
+        #moon {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: 40px;
+            right: 40px;
+            filter: blur(2px);
+            z-index: 3;
+        }
+
+        #treeline {
+            position: absolute;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url("trees.png") repeat;
+            background-size: cover;
+            filter: blur(1px);
+            z-index: 4;
+        }
+
+        #ground {
+            position: absolute;
+            width: 100%;
+            height: 750px;
+            bottom: 0;
+            left: 0;
+            filter: blur(0.5px) brightness(40%);
+            object-fit: cover;
+            z-index: 5;
+        }
+
+        #tent {
+            position: absolute;
+            width: 1200px;
+            height: auto;
+            right: 200px;
+            bottom: 0;
+            z-index: 6;
+        }
+        #tent:hover {
+            filter: drop-shadow(0 0 1px white) drop-shadow(0 0 2px white);
+        }
+
+        #logs {
+            position: absolute;
+            width: 1300px;
+            height: auto;
+            left: 100px;
+            bottom: 0;
+            z-index: 7;
+        }
+
+        #guyman {
+            position: absolute;
+            width: 1300px;
+            height: auto;
+            left: 100px;
+            bottom: 0;
+            z-index: 8;
+        }
+
+        #campfire {
+            position: absolute;
+            width: 1100px;
+            height: auto;
+            left: 200px;
+            bottom: 0;
+            z-index: 9;
+        }
+
+        @keyframes bgScroll {
+            from { background-position: 0 0; }
+            to { background-position: 1500px 1000px; }
+        }
+
+        main {
+            margin: 10px;
+            position: relative;
+            z-index: 20;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SKY & BACKGROUND LAYERS -->
+    <div id="sky"></div>
+    <div id="stars"></div>
+    <div id="treeline"></div>
+
+    <!-- OBJECT LAYERS -->
+    <img id="moon" src="moon.png">
+    <img id="ground" src="ground.png">
+    <img id="tent" src="tent.png">
+    <img id="logs" src="logs.png">
+    <img id="guyman" src="guy.png">
+    <img id="campfire" src="fire.png">
+
+    <main></main>
+
+    <script type="module" src="/assets/js/main.js"></script>
+</body>
+</html>
