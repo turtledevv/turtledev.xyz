@@ -105,6 +105,7 @@ body#dark div.dynamic emoji {
 /* warning end */
 
 #me {
+    text-align: left;
     width: fit-content;
     padding: 8px 120px;
     margin-top: 8px;
