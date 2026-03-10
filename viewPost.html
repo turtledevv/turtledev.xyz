@@ -34,17 +34,12 @@
   </head>
 
   <body data-page="posts">
-    <!--stops 'ow my eyes' when constantly refreshing using dark mode on. tl;dr: added cause of flashing lights-->
-    <!--also looks cool-->
-    <div id="blackBox"></div>
-
     <main>
-      <div id="searchBarContainer">
-          <input type="text" id="postSearch" placeholder="Search posts...">
-          <button id="searchBtn">Search</button>
-      </div>
-      <div id="postContainer"></div>
+        <button style="display: inline-block;" onClick="history.back()">←</button>
+        <div style="display: inline-block;" id="post-header"></div>
+        <div id="post-content"></div>
     </main>
-    <script src="posts.js"></script>
   </body>
+
+  <script src="viewPost.js"></script>
 </html>

@@ -52,5 +52,44 @@
         </div>
       </section>
     </main>
+    <script>
+      async function loadLatestPost() {
+          const res = await fetch(`https://turtleposts.vercel.app/api/posts?limit=1&col=trtl`);
+          const posts = await res.json();
+
+          const latestPostDiv = document.getElementById('latest-post');
+          latestPostDiv.innerHTML = ""; // clear default text
+
+          if (!posts || posts.length === 0) {
+              latestPostDiv.textContent = "No news today!!";
+              return;
+          }
+
+          const post = posts[0];
+          const timestamp = new Date(post.timestamp).toLocaleString();
+
+          let thumbnail = post.thumbnail;
+          if (!post.thumbnail.startsWith('http')) {
+              thumbnail = `https://turtleposts.vercel.app${post.thumbnail}`;
+          }
+
+          latestPostDiv.innerHTML = `
+              <div class="post-text">
+                  <h2>${post.title}</h2>
+                  <small>By ${post.author} | ${timestamp}</small>
+              </div>
+              <img src="${thumbnail}" alt="${post.thumbnail}" class="post-thumbnail">
+          `;
+
+          latestPostDiv.classList.add('post', 'dynamic');
+          latestPostDiv.style.cursor = 'pointer';
+          latestPostDiv.onclick = () => {
+              window.location.href = `/viewPost.html?id=${post.id}`;
+          };
+      }
+
+      // run on page load
+      loadLatestPost();
+    </script>
   </body>
 </html>
