@@ -19,8 +19,9 @@
     });
 })();
 
-const params = new URLSearchParams(window.location.search);
-if (params.get("nl") === "1") {
+// called "aparams" to fix conflict with other scripts
+const aparams = new URLSearchParams(window.location.search);
+if (aparams.get("nl") === "1") {
     // Create a <style> element
     const style = document.createElement("style");
     style.textContent = `
