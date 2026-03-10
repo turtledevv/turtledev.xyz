@@ -92,9 +92,17 @@ footer img {
     margin-right: 5px;
 }
 
-div.a {
-    background: url('assets/div.png');
-    background-size: 100% 100%;
+div.dynamic {
+    padding: 0px;
+    border-width: 20px;
+    border-style: solid;
+    border-image-source: url('/assets/div.png');
+    border-image-slice: 20;
+    border-image-repeat: repeat;
+    resize: both;
+    overflow: auto;
+    box-sizing: border-box;
+    image-rendering: pixelated;
 }
 
 #me {
