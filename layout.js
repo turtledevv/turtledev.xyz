@@ -18,3 +18,16 @@
         (document.body || body).insertAdjacentHTML("beforeend", html);
     });
 })();
+
+const params = new URLSearchParams(window.location.search);
+if (params.get("nw") === "1") {
+    // Create a <style> element
+    const style = document.createElement("style");
+    style.textContent = `
+        nav, header {
+            display: flex;
+            justify-content: center;
+        }
+    `;
+    document.head.appendChild(style);
+}
