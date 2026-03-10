@@ -1,4 +1,5 @@
 User-agent: *
-Disallow:
+Disallow: /.well-known/
+Disallow: /stuff/
 
 Sitemap: https://turtledev.xyz/sitemap.xml
