@@ -4,7 +4,7 @@
     const headerReq = fetch("/assets/header.html").then(r => r.text());
     const footerReq = fetch("/assets/footer.html").then(r => r.text());
 
-    // Insert header
+    // insert da header
     headerReq.then(html => {
         const first = body?.firstElementChild;
 
@@ -14,14 +14,17 @@
             body.insertAdjacentHTML("afterbegin", html);
         }
 
-        const currentPage = body.dataset.page;
-        if (currentPage) {
-            const btn = document.getElementById("nav-" + currentPage);
+        requestAnimationFrame(() => {
+            const currentPage = body.dataset.page;
+            if (!currentPage) return;
+
+            // use querySelector to handle cases where nav buttons are nested
+            const btn = document.querySelector(`#nav-${currentPage}`);
             if (btn) btn.style.fontWeight = "bold";
-        }
+        });
     });
 
-    // Insert footer
+    // then, insert thy footeh
     footerReq.then(html => {
         body.insertAdjacentHTML("beforeend", html);
     });
