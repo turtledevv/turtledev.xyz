@@ -20,7 +20,7 @@
 })();
 
 const params = new URLSearchParams(window.location.search);
-if (params.get("nw") === "1") {
+if (params.get("nl") === "1") {
     // Create a <style> element
     const style = document.createElement("style");
     style.textContent = `
