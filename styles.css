@@ -104,7 +104,7 @@ body#dark div.dynamic emoji {
 }
 /* warning end */
 
-#me {
+div#latest-post {
     text-align: left;
     width: fit-content;
     padding: 8px 120px;
