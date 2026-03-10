@@ -1,3 +1,12 @@
+function page(name) {
+    name = name.toLowerCase();
+
+    if (name === "home") {
+        location.href = "/";
+    } else {
+        location.href = "/" + name + ".html";
+    }
+}
 
 function setCookie(name, value, days) {
     var expires = new Date();

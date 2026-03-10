@@ -4,17 +4,25 @@
     const headerReq = fetch("/assets/header.html").then(r => r.text());
     const footerReq = fetch("/assets/footer.html").then(r => r.text());
 
+    // Insert header
     headerReq.then(html => {
-        const first = document.body?.firstElementChild;
+        const first = body?.firstElementChild;
 
         if (first && first.classList.contains("aboveHeader")) {
             first.insertAdjacentHTML("afterend", html);
         } else {
-            (document.body || body).insertAdjacentHTML("afterbegin", html);
+            body.insertAdjacentHTML("afterbegin", html);
+        }
+
+        const currentPage = body.dataset.page;
+        if (currentPage) {
+            const btn = document.getElementById("nav-" + currentPage);
+            if (btn) btn.style.fontWeight = "bold";
         }
     });
 
+    // Insert footer
     footerReq.then(html => {
-        (document.body || body).insertAdjacentHTML("beforeend", html);
+        body.insertAdjacentHTML("beforeend", html);
     });
 })();
