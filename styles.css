@@ -105,8 +105,12 @@ body#dark div.dynamic emoji {
 /* warning end */
 
 div#latest-post {
+    display: flex;
     text-align: left;
-    width: fit-content;
-    padding: 8px 120px;
+    align-items: center;
+    padding-left: 8px;
+    padding-bottom: 3px;
+    width: 450px;
+    height: 85px;
     margin-top: 8px;
 }
