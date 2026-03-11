@@ -43,14 +43,14 @@ async function loadPosts(search = "") {
 loadPosts();
 
 // search handling
-document.getElementById('searchBtn').onclick = () => {
-    const query = document.getElementById('postSearch').value;
-    loadPosts(query);
-};
+// document.getElementById('searchBtn').onclick = () => {
+//     const query = document.getElementById('postSearch').value;
+//     loadPosts(query);
+// };
 
-document.getElementById('postSearch').addEventListener('keypress', e => {
-    if (e.key === 'Enter') {
-        const query = e.target.value;
-        loadPosts(query);
-    }
-});
+// document.getElementById('postSearch').addEventListener('keypress', e => {
+//     if (e.key === 'Enter') {
+//         const query = e.target.value;
+//         loadPosts(query);
+//     }
+// });
