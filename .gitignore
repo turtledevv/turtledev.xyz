@@ -1,0 +1,34 @@
+# SvelteKit build output
+.svelte-kit
+
+# Vite / build output
+dist
+build
+
+# Dependencies
+node_modules
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# OS junk (because of course it exists)
+.DS_Store
+Thumbs.db
+
+# Editor stuff
+.vscode
+.idea
+
+# Optional: local Vercel output
+.vercel
+
+# TypeScript / SvelteKit generated types (safe to ignore)
+*.tsbuildinfo
