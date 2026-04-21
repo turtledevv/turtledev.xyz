@@ -5,18 +5,6 @@
 
   import { inject } from '@vercel/analytics';
 
-  onMount(() => {
-    const s1 = document.createElement('script');
-    s1.src = 'https://www.freevisitorcounters.com/auth.php?id=572b730bf164942c3523c84776c0584016e39af1';
-    s1.async = true;
-    document.body.appendChild(s1);
-
-    const s2 = document.createElement('script');
-    s2.src = 'https://www.freevisitorcounters.com/en/home/counter/1538481/t/5';
-    s2.async = true;
-    document.body.appendChild(s2);
-  });
-
   let dark = false;
   let blackBoxVisible = true;
 
