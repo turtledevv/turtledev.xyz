@@ -1,0 +1,241 @@
+/* ============================================================
+   Global styles — ported from styles.css
+   Dark mode uses .dark on the #app wrapper instead of body#dark
+   ============================================================ */
+
+/* Reset */
+body {
+  margin: 0;
+  width: 100vw;
+  min-height: 100vh;
+  background: white;
+}
+
+#app {
+  min-height: 100vh;
+  background: white;
+  color: black;
+}
+
+/* Dark mode */
+#app.dark {
+  color: white;
+  background-color: black;
+}
+
+#app.dark nav {
+  filter: invert(1);
+}
+
+#app.dark main button,
+#app.dark img#cat {
+  filter: invert(1);
+}
+
+/* Layout */
+main, header {
+  margin: 8px;
+}
+
+header {
+  display: flex;
+  height: 80px;
+}
+
+nav button {
+  margin-right: 10px;
+}
+
+nav {
+  padding-left: 8px;
+  background: url('/assets/lines.gif');
+  background-repeat: repeat-x;
+  background-size: 265px 100%;
+  background-position: top;
+  padding-bottom: 18px;
+  padding-top: 15px;
+}
+
+/* Buttons */
+button {
+  background: url('/assets/button.gif');
+  background-size: 100% 100%;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 3.77px;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.5);
+}
+
+/* Footer */
+footer {
+  margin-top: 60px;
+  width: 100vw;
+  text-align: center;
+}
+
+footer img {
+  margin-right: 5px;
+}
+
+/* Dynamic bordered divs */
+div.dynamic {
+  border-width: 20px;
+  border-style: solid;
+  border-image-source: url('/assets/div.png');
+  border-image-slice: 20;
+  border-image-repeat: repeat;
+  overflow: auto;
+  box-sizing: border-box;
+  image-rendering: pixelated;
+}
+
+div.dynamic * {
+  image-rendering: auto;
+}
+
+/* warning; janky as hell */
+#app.dark div.dynamic {
+  color: rgb(0, 0, 0);
+  filter: invert(1);
+}
+
+#app.dark div.dynamic emoji {
+  filter: invert(1);
+}
+/* warning end */
+
+/* Latest post */
+div#latest-post {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  padding-left: 8px;
+  padding-bottom: 6px;
+  width: 500px;
+  height: 160px;
+  margin-top: 8px;
+}
+
+/* Posts list */
+#postContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px !important;
+}
+
+.post {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.post-thumbnail {
+  aspect-ratio: 16/9;
+  height: 100px;
+  width: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.post-text {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.post-text h2 {
+  margin: 0 0 0.5rem 0;
+}
+
+#post-header {
+  font-size: 0.8em;
+  color: rgb(95, 95, 95);
+  margin-bottom: 1rem;
+}
+
+/* Custom emoji element */
+emoji {
+  display: inline-block;
+  content: none;
+  height: 20px;
+  width: 20px;
+}
+
+/* Classic emojis */
+emoji#classic\ biggrin    { background: url('/assets/emojis/classic/biggrin.gif');    background-size: cover; }
+emoji#classic\ blush      { background: url('/assets/emojis/classic/blush.gif');      background-size: cover; }
+emoji#classic\ bouncey    { background: url('/assets/emojis/classic/bouncey.gif');    background-size: cover; }
+emoji#classic\ brushteeth { background: url('/assets/emojis/classic/brushteeth.gif'); background-size: cover; }
+emoji#classic\ cheers     { background: url('/assets/emojis/classic/cheers.gif');     background-size: cover; }
+emoji#classic\ clown      { background: url('/assets/emojis/classic/clown.gif');      background-size: cover; }
+emoji#classic\ confused   { background: url('/assets/emojis/classic/confused.gif');   background-size: cover; }
+emoji#classic\ cool       { background: url('/assets/emojis/classic/cool.gif');       background-size: cover; }
+emoji#classic\ cry        { background: url('/assets/emojis/classic/cry.gif');        background-size: cover; }
+emoji#classic\ dead       { background: url('/assets/emojis/classic/dead.gif');       background-size: cover; }
+emoji#classic\ eek        { background: url('/assets/emojis/classic/eek.gif');        background-size: cover; }
+emoji#classic\ frown      { background: url('/assets/emojis/classic/frown.gif');      background-size: cover; }
+emoji#classic\ hail       { background: url('/assets/emojis/classic/hail.gif');       background-size: cover; }
+emoji#classic\ idea       { background: url('/assets/emojis/classic/idea.gif');       background-size: cover; }
+emoji#classic\ kiss       { background: url('/assets/emojis/classic/kiss.gif');       background-size: cover; }
+emoji#classic\ laugh      { background: url('/assets/emojis/classic/laugh.gif');      background-size: cover; }
+emoji#classic\ look       { background: url('/assets/emojis/classic/look.gif');       background-size: cover; }
+emoji#classic\ mad        { background: url('/assets/emojis/classic/mad.gif');        background-size: cover; }
+emoji#classic\ nerd       { background: url('/assets/emojis/classic/nerd.gif');       background-size: cover; }
+emoji#classic\ nono       { background: url('/assets/emojis/classic/nono.gif');       background-size: cover; }
+emoji#classic\ notgood    { background: url('/assets/emojis/classic/notgood.gif');    background-size: cover; }
+emoji#classic\ perfect    { background: url('/assets/emojis/classic/perfect.gif');    background-size: cover; }
+emoji#classic\ quiet      { background: url('/assets/emojis/classic/quiet.gif');      background-size: cover; }
+emoji#classic\ rose       { background: url('/assets/emojis/classic/rose.gif');       background-size: cover; }
+emoji#classic\ sleep      { background: url('/assets/emojis/classic/sleep.gif');      background-size: cover; }
+emoji#classic\ smile      { background: url('/assets/emojis/classic/smile.gif');      background-size: cover; }
+emoji#classic\ tongue     { background: url('/assets/emojis/classic/tongue.gif');     background-size: cover; }
+emoji#classic\ turtle-icon{ background: url('/assets/emojis/classic/turtle-icon.gif');background-size: cover; }
+emoji#classic\ wave       { background: url('/assets/emojis/classic/wave.gif');       background-size: cover; }
+emoji#classic\ whissle    { background: url('/assets/emojis/classic/whissle.gif');    background-size: cover; }
+emoji#classic\ wink       { background: url('/assets/emojis/classic/wink.gif');       background-size: cover; }
+
+/* New emojis */
+emoji#new\ biggrin  { background: url('/assets/emojis/new/biggrin.png');  background-size: cover; }
+emoji#new\ confused { background: url('/assets/emojis/new/confused.png'); background-size: cover; }
+emoji#new\ cool     { background: url('/assets/emojis/new/cool.png');     background-size: cover; }
+emoji#new\ eek      { background: url('/assets/emojis/new/eek.png');      background-size: cover; }
+emoji#new\ frown    { background: url('/assets/emojis/new/frown.png');    background-size: cover; }
+emoji#new\ mad      { background: url('/assets/emojis/new/mad.png');      background-size: cover; }
+emoji#new\ redface  { background: url('/assets/emojis/new/redface.png');  background-size: cover; }
+emoji#new\ rolleyes { background: url('/assets/emojis/new/rolleyes.png'); background-size: cover; }
+emoji#new\ shrug    { background: url('/assets/emojis/new/shrug.webp');   background-size: cover; }
+emoji#new\ smile    { background: url('/assets/emojis/new/smile.png');    background-size: cover; }
+emoji#new\ thumbup  { background: url('/assets/emojis/new/thumbup.png');  background-size: cover; }
+emoji#new\ tounge   { background: url('/assets/emojis/new/tounge.png');   background-size: cover; }
+emoji#new\ wink     { background: url('/assets/emojis/new/wink.png');     background-size: cover; }
+
+/* Turtle emojis */
+emoji#turtle\ careless   { background: url('/assets/emojis/turtle/careless.png');   background-size: cover; }
+emoji#turtle\ cuss       { background: url('/assets/emojis/turtle/cuss.png');       background-size: cover; }
+emoji#turtle\ eye        { background: url('/assets/emojis/turtle/eye.png');        background-size: cover; }
+emoji#turtle\ idea       { background: url('/assets/emojis/turtle/idea.png');       background-size: cover; }
+emoji#turtle\ joy        { background: url('/assets/emojis/turtle/joy.png');        background-size: cover; }
+emoji#turtle\ king       { background: url('/assets/emojis/turtle/king.png');       background-size: cover; }
+emoji#turtle\ mad        { background: url('/assets/emojis/turtle/mad.png');        background-size: cover; }
+emoji#turtle\ melt       { background: url('/assets/emojis/turtle/melt.png');       background-size: cover; }
+emoji#turtle\ party      { background: url('/assets/emojis/turtle/party.png');      background-size: cover; }
+emoji#turtle\ pixel      { background: url('/assets/emojis/turtle/pixel.png');      background-size: cover; }
+emoji#turtle\ program    { background: url('/assets/emojis/turtle/program.png');    background-size: cover; }
+emoji#turtle\ question   { background: url('/assets/emojis/turtle/question.png');   background-size: cover; }
+emoji#turtle\ raged      { background: url('/assets/emojis/turtle/raged.png');      background-size: cover; }
+emoji#turtle\ robot      { background: url('/assets/emojis/turtle/robot.png');      background-size: cover; }
+emoji#turtle\ shock      { background: url('/assets/emojis/turtle/shock.png');      background-size: cover; }
+emoji#turtle\ skull      { background: url('/assets/emojis/turtle/skull.png');      background-size: cover; }
+emoji#turtle\ smile      { background: url('/assets/emojis/turtle/smile.png');      background-size: cover; }
+emoji#turtle\ sob        { background: url('/assets/emojis/turtle/sob.png');        background-size: cover; }
+emoji#turtle\ sunglasses { background: url('/assets/emojis/turtle/sunglasses.png'); background-size: cover; }
+emoji#turtle\ sweat      { background: url('/assets/emojis/turtle/sweat.png');      background-size: cover; }
+emoji#turtle\ thumbup    { background: url('/assets/emojis/turtle/thumbup.png');    background-size: cover; }
+emoji#turtle\ warn       { background: url('/assets/emojis/turtle/warn.png');       background-size: cover; }
