@@ -43,6 +43,21 @@
   $: currentPage = $page.url.pathname;
 </script>
 
+<svelte:head>
+  <link rel="canonical" href={$page.url.href} />
+  <meta property="og:url" content={$page.url.href} />
+
+  <title>turtledevv's corner</title>
+  <meta property="og:title" content="turtledevv's corner" />
+  <meta property="og:description" content="Turtledevv's personal website, home to my weirdest and latest creations." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.turtledev.xyz/assets/stupidbanner.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="turtledevv's corner" />
+  <meta name="twitter:description" content="Turtledevv's personal website, home to my weirdest and latest creations." />
+  <meta name="twitter:image" content="https://www.turtledev.xyz/assets/stupidbanner.png" />
+</svelte:head>
+
 {#if blackBoxVisible}
   <div id="blackBox" class="black-box"></div>
 {/if}
