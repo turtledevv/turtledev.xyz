@@ -1,8 +1,3 @@
-/* ============================================================
-   Global styles — ported from styles.css
-   Dark mode uses .dark on the #app wrapper instead of body#dark
-   ============================================================ */
-
 /* Reset */
 body {
   margin: 0;
@@ -11,16 +6,22 @@ body {
   background: white;
 }
 
+body:has(#app.dark) {
+  background: black;
+  color: white;
+}
+
 #app {
   min-height: 100vh;
-  background: white;
+  background-color: #001f1f1f;
   color: black;
+  max-width: 80vw;
+  margin: 0 auto;
 }
 
 /* Dark mode */
 #app.dark {
   color: white;
-  background-color: black;
 }
 
 #app.dark nav {
@@ -34,12 +35,13 @@ body {
 
 /* Layout */
 main, header {
-  margin: 8px;
+  padding: 8px;
 }
 
 header {
   display: flex;
   height: 80px;
+  justify-content: center;
 }
 
 nav button {
@@ -54,6 +56,12 @@ nav {
   background-position: top;
   padding-bottom: 18px;
   padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* Buttons */
@@ -73,7 +81,7 @@ button:hover {
 /* Footer */
 footer {
   margin-top: 60px;
-  width: 100vw;
+  width: 100%;
   text-align: center;
 }
 
@@ -120,6 +128,10 @@ div#latest-post {
   margin-top: 8px;
 }
 
+#app.dark #latest-post * {
+  color: white !important;
+}
+
 /* Posts list */
 #postContainer {
   display: flex;
@@ -143,6 +155,12 @@ div#latest-post {
   object-fit: cover;
   border-radius: 4px;
   margin-right: 10px;
+  color: transparent;
+}
+
+/* jank as fuc fix but it'll have to work. */
+#app.dark .post-thumbnail {
+  filter: invert(1);
 }
 
 .post-text {

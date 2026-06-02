@@ -22,6 +22,5 @@
     justify-content: center;
     text-align: center;
     min-height: 100dvh;
-    width: 100vw;
   }
 </style>
