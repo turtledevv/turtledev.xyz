@@ -15,7 +15,7 @@ body:has(#app.dark) {
   min-height: 100vh;
   background-color: #001f1f1f;
   color: black;
-  max-width: 80vw;
+  max-width: 70vw;
   margin: 0 auto;
 }
 
