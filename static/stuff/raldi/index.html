@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Objectasks: The Meta Wars</title>
+        <style>
+            body {
+                background: #00acff;
+                margin: 0;
+                padding: 0;
+                image-rendering: pixelated;
+                font-size: 16px;
+            }
+
+            div#ting {
+                position: relative;
+                width: 16em;
+                height: 16em;
+
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                justify-content: center;
+
+                background: #00acff url("MetaWarBG.png") repeat-x;
+            }
+
+            div#ting-scroll-logos {
+                position: absolute;
+                inset: 0;
+                z-index: 0;
+
+                width: 100%;
+                height: 100%;
+
+                pointer-events: none;
+                padding-top: 0.5em;
+            }
+
+            div.ting-icon {
+                position: absolute;
+                z-index: 2;
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+
+                /*background-color: rgba(0,0,0, 0.8);*/
+                width: 30px;
+                height: 30px;
+
+            }
+
+            div.ting-icon.ting-player {
+                background-image: url("MetaPlayerLooks.png") !important;
+                background-repeat: no-repeat;
+                background-position: -60px -30px;
+            }
+
+            div#icn1 {top: 3em; left: 3em;}
+            div#icn2 {top: 3em; left: 8em;}
+            div#icn3 {top: 3em; left: 13em;}
+            div#icn4 {top: 7em; left: 3em;}
+            div#icn5 {top: 7em; left: 8em;}
+            div#icn6 {top: 7em; left: 13em;}
+            div#icn7 {top: 11em; left: 3em;}
+            div#icn8 {top: 11em; left: 8em;}
+            div#icn9 {top: 11em; left: 13em;}
+
+            div#ting-light {
+                position: absolute;
+
+                top: 7em;
+                left: 8em;
+                /*
+                               left:3em            left:8em                   left:13em
+                    top:3em    VAN MAN             CHIPFLOKE                  Mr. BEAST
+                    top:7em    FIRST PRIZE         PLAYER / CRYPTO LUIGI      RALDI CRACK
+                    top:11em   ARTS AND CRAFTERS   BRITISH BLOKE              PINTO BEANS
+                */
+
+                transform: translate(-50%, -50%);
+                z-index: 2;
+
+                background: url("LitUpBox.png");
+                background-repeat: no-repeat;
+                width: 3em;
+                height: 3em;
+
+                pointer-events: none;
+            }
+
+            div#ting-text {
+                background: url("AtlasObjectaskMessages.png");
+                background-repeat: no-repeat;
+                width: 100%;
+                min-height: 1em;
+                margin-top: 0.5em;
+
+                /*
+
+                 0: GET HIM OUT OF YOUR WAY!
+                    USE SOMETHING POWERFUL
+
+                -1: FIND AND USE A
+                    MONOPOLY REFERENCE
+
+                -2: SHOOT Mr.BEAST WHEN HES
+                    MAD AT YOU!!
+
+                -3: GETTING HUGGED?
+                    WHAT A STICKY SITUATION!
+
+                -4: COLLECT 10 ETHEREUM AND FREE
+                    CRYPTO LUIGI FROM PRISON
+
+                -5: GIVE RALDI SOMETHING HE
+                    L I K E S .
+
+                -6: GET A NOTEBOOK BEFORE HE CATCHES
+                    YOU!
+
+                -7: GIVE HIM AN ITEM THAT WILL MAKE
+                    HIM SUPER HYPER FOR 15 SECONDS!
+
+                -8: SPLASH HIS BULLETS WITH A DRINK!
+
+
+                -9: ESC TO QUIT  ARROWS TO MOVE
+                    ENTER TO SEE HOW TO BEAT
+
+                */
+                background-position-y: -9em;
+            }
+
+            @keyframes scroll-left {
+                from { background-position: 0 0; }
+                to   { background-position: -624px 0; }
+            }
+
+            @keyframes scroll-right {
+                from { background-position: 0 0; }
+                to   { background-position: 624px 0; }
+            }
+
+            #scrlogo1,
+            #scrlogo3 {
+                animation: scroll-left 20s linear infinite;
+            }
+
+            #scrlogo2 {
+                animation: scroll-right 20s linear infinite;
+            }
+
+            div.ting-scroll-logo {
+                background: url("MetaScrollingLogo.png");
+                background-repeat: repeat-x;
+                width: 100%;
+                height: 2em;
+                padding-bottom: 2em;
+            }
+
+            #ting-rows {
+                margin-top: 0.5em;
+                position: relative;
+                z-index: 1;
+
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            div.ting-row {
+                width: 100%;
+                min-height: 4em;
+
+                background-repeat: no-repeat;
+                background-size: contain;
+            }
+
+            div#row1 { background-image: url("MetaPanel_01.png"); }
+            div#row2 { background-image: url("MetaPanel_02.png"); }
+            div#row3 { background-image: url("MetaPanel_03.png"); }
+        </style>
+    </head>
+    <body>
+        <audio id="bgm" src="mus_atlastasks.ogg" loop preload="auto"></audio>
+        <audio id="select-sfx" src="metaselect.ogg" preload="auto"></audio>
+        <div id="ting">
+            <div id="ting-scroll-logos">
+                <div class="ting-scroll-logo" id="scrlogo1"></div>
+                <div class="ting-scroll-logo" id="scrlogo2"></div>
+                <div class="ting-scroll-logo" id="scrlogo3"></div>
+            </div>
+            <div id="ting-rows">
+                <div class="ting-row" id="row1"></div>
+                <div class="ting-row" id="row2"></div>
+                <div class="ting-row" id="row3"></div>
+            </div>
+            <div id="ting-icons">
+                <div class="ting-icon" id="icn1"></div>
+                <div class="ting-icon" id="icn2"></div>
+                <div class="ting-icon" id="icn3"></div>
+                <div class="ting-icon" id="icn4"></div>
+                <div class="ting-icon ting-player" id="icn5"></div>
+                <div class="ting-icon" id="icn6"></div>
+                <div class="ting-icon" id="icn7"></div>
+                <div class="ting-icon" id="icn8"></div>
+                <div class="ting-icon" id="icn9"></div>
+            </div>
+            <div id="ting-light"></div>
+            <div id="ting-text"></div>
+        </div>
+        <script>
+            function startBgm() {
+                const bgm = document.querySelector("#bgm");
+                if (!bgm) {
+                    console.error("No #bgm element found — check your <audio id=\"bgm\"> tag.");
+                    return;
+                }
+
+                bgm.volume = 0;
+
+                function fadeInAudio(audio, duration = 2000, targetVolume = 1) {
+                    const stepTime = 50;
+                    const steps = duration / stepTime;
+                    const increment = targetVolume / steps;
+
+                    const fade = setInterval(() => {
+                        if (audio.volume + increment < targetVolume) {
+                            audio.volume += increment;
+                        } else {
+                            audio.volume = targetVolume;
+                            clearInterval(fade);
+                        }
+                    }, stepTime);
+                }
+
+                const beginPlayback = () => {
+                    bgm.play()
+                        .then(() => fadeInAudio(bgm))
+                        .catch((err) => console.error("Playback failed:", err));
+                };
+
+                document.addEventListener("keydown", beginPlayback, { once: true });
+                document.addEventListener("click", beginPlayback, { once: true });
+            }
+
+            document.addEventListener("DOMContentLoaded", startBgm);
+        </script>
+        <script>
+            const GRID_TOPS   = [3, 7, 11];   // em, ting-light row positions
+            const GRID_LEFTS  = [3, 8, 13];   // em, ting-light col positions
+            const SPRITE_SIZE = 30;           // px, ting-player spritesheet cell size
+
+            let row = 1;
+            let col = 1;
+
+            let lastPlayedIndex = null;
+
+            function updateTingText() {
+                const tingText = document.querySelector("#ting-text");
+                const index = row * GRID_LEFTS.length + col; // 0 = top-left, left-to-right then top-to-bottom
+                tingText.style.backgroundPositionY = `-${index}em`;
+            }
+
+            const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
+
+            function updateSelection() {
+                const tingLight = document.querySelector("#ting-light");
+                tingLight.style.top = GRID_TOPS[row] + "em";
+                tingLight.style.left = GRID_LEFTS[col] + "em";
+
+                const tingPlayer = document.querySelector(".ting-icon.ting-player");
+                tingPlayer.style.backgroundPosition = `-${col * SPRITE_SIZE}px -${row * SPRITE_SIZE}px`;
+            }
+
+            function playSelectSfx() {
+                const sfx = document.querySelector("#select-sfx");
+                sfx.pause();
+                sfx.currentTime = 0;
+                sfx.play().catch((err) => console.error("SFX playback failed:", err));
+            }
+
+            document.addEventListener("keydown", (e) => {
+                switch (e.key) {
+                    case "ArrowUp":    row = clamp(row - 1, 0, 2); break;
+                    case "ArrowDown":  row = clamp(row + 1, 0, 2); break;
+                    case "ArrowLeft":  col = clamp(col - 1, 0, 2); break;
+                    case "ArrowRight": col = clamp(col + 1, 0, 2); break;
+                    case "Enter":
+                        e.preventDefault();
+
+                        const currentIndex = row * GRID_LEFTS.length + col;
+                        if (currentIndex !== lastPlayedIndex) {
+                            playSelectSfx();
+                            lastPlayedIndex = currentIndex;
+                        }
+
+                        updateTingText();
+                        return;
+                    case "Escape":
+                        playSelectSfx();
+                        const tingText = document.querySelector("#ting-text");
+                        tingText.style.backgroundPositionY = '-9em';
+                        return;
+                    default: return;
+                }
+
+                e.preventDefault();
+                updateSelection();
+            });
+
+            document.addEventListener("DOMContentLoaded", updateSelection);
+        </script>
+    </body>
+</html>
